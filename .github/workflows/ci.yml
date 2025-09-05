@@ -6,26 +6,19 @@ on:
   pull_request:
     branches: [ "main" ]
 
-jobs:
-  test:
-    name: Run Tests
-    runs-on: ubuntu-20.04
+jobs: 
+  test-node: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - uses: actions/checkout@v3
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Set up Node.js 
+        uses: actions/setup-node@v4 
+        with: 
+          node-version: "20" 
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install Dependencies and Run Tests
-        run: |
-          # Add the current directory to the Python search path
-          export PYTHONPATH=$PYTHONPATH:.
-          # Install the test requirements
-          pip install -r requirements.txt
-          # Run the tests from the root directory
-          pytest
-
+      - name: Install dependencies 
+        run: npm ci || npm install 
+        
+      - name: Run Jest tests 
+        run: npm test -- --ci 
