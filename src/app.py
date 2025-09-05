@@ -1,2 +1,2 @@
 def greet(name: str) -> str:
-   return f"Hello, {name}! Welcome to Agile Devops."
+   return f"Hello, {name}! Welcome to Agile DevOps."
