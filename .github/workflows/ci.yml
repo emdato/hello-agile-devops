@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up python
         uses: actions/setup-python@v5
         with:
@@ -19,13 +20,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      # The new step: Install the project in editable mode
-      - name: Install Project as a Package
-        run: pip install -e .
       - name: Run pytest
-        env:
-          PYTHONPATH: /home/runner/work/hello-agile-devops/hello-agile-devops/
         run: pytest -q
-        working-directory: ./hello-agile-devops
 
 
